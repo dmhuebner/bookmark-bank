@@ -33,3 +33,5 @@ end
 
 # Bootstrap
 gem 'bootstrap-sass'
+# Devise
+gem 'devise'
