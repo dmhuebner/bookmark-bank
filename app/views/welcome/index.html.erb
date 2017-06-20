@@ -1,2 +1,14 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<h1 class="text-center">Welcome to Bookmark Bank!</h1>
+		<br />
+		<div class="jumbotron">
+			<p class="lead text-center">Bookmark Bank is designed to help you manage your bookmarks.</p>
+			<p class="lead">It allows you to keep track of bookmarks with bookmark categories and allows you to make bookmarks public to share with others! </p>
+			<div class="text-center">
+				<%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary'  %>
+				<%= link_to "Sign In", new_user_session_path, class: 'btn btn-default'  %>
+			</div>
+		</div>
+	</div>
+</div>
