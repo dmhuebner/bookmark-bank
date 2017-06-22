@@ -12,7 +12,13 @@
 	<div class="col-md-8 col-md-offset-2">
 		<hr />
 		<% @topics.each do |t| %>
-			<h3><%= link_to t.title, t %></h3>
+			<div class="col-sm-10">
+				<h3><%= link_to t.title, t %></h3>
+			</div>
+			<div class="col-sm-2">
+				<%= link_to "Edit Topic", edit_topic_path(t), class: "btn btn-default btn-xs edit-topic-btn" %>
+				<!-- <%= link_to "Delete", t, method: :delete, class: "btn btn-danger btn-xs delete-topic-btn", data: {confirm: "Are you sure you want to delete the topic, \"#{t.title}\"?"} %> -->
+			</div>
 		<% end %>
 	</div>
 </div>

@@ -65,12 +65,52 @@ RSpec.describe TopicsController, type: :controller do
 			end
 		end
 
-	  # describe "GET #edit" do
-	  #   it "returns http success" do
-	  #     get :edit
-	  #     expect(response).to have_http_status(:success)
-	  #   end
-	  # end
+	  describe "GET #edit" do
+	    it "returns http success" do
+	      get :edit, id: my_topic.id
+	      expect(response).to have_http_status(:success)
+	    end
+			it "renders the #edit view" do
+				get :edit, id: my_topic.id
+				expect(response).to render_template(:edit)
+			end
+			it "assigns the topic to be updated to @topic" do
+				get :edit, id: my_topic.id
+				topic_instance = assigns(:topic)
+				expect(topic_instance.id).to eq(my_topic.id)
+				expect(topic_instance.title).to eq(my_topic.title)
+			end
+	  end
+
+		describe "PUT update" do
+			it "updates topic with expected attributes" do
+				new_title = RandomData.random_sentence
+				put :update, id: my_topic.id, topic: {title: new_title}
+				updated_topic = assigns(:topic)
+				expect(updated_topic.id).to eq(my_topic.id)
+				expect(updated_topic.title).to eq(new_title)
+			end
+			it "redirects to the updated topic" do
+				new_title = RandomData.random_sentence
+				put :update, id: my_topic.id, topic: {title: new_title}
+				expect(response).to redirect_to(my_topic)
+			end
+		end
+
+		describe "DELETE destroy" do
+			it "user deletes their own topic" do
+				topic = Topic.create(title: RandomData.random_sentence, user_id: my_user.id)
+				delete :destroy, id: topic.id
+				count = Topic.where({id: topic.id}).size
+				expect(count).to eq(0)
+			end
+			it "redirects to topics index" do
+				topic = Topic.create(title: RandomData.random_sentence, user_id: my_user.id)
+				delete :destroy, id: topic.id
+				expect(response).to redirect_to topics_path
+			end
+		end
+
 	end
 
 end

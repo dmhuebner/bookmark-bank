@@ -1,6 +1,7 @@
 <%= form_for topic do |f| %>
 	<% if topic.errors.any? %>
 		<div class="alert alert-danger">
+			<a href="#" data-dismiss="alert" class="close">&times;</a>
 			<h4><%= pluralize(topic.errors.count, "Error") %>:</h4>
 			<ul>
 				<% topic.errors.full_messages.each do |msg| %>
@@ -11,9 +12,10 @@
 	<% end %>
 	<%= form_group_tag(topic.errors[:title]) do %>
 		<%= f.label :title, class: "sr-only" %>
-		<%= f.text_field :title, class: "form-control", placeholder: "Enter topic title" %>
+		<%= f.text_field :title, class: "form-control input-lg", placeholder: "Enter topic title" %>
 	<% end %>
 	<div class="form-group text-center">
 		<%= f.submit "Save", class: "btn btn-primary btn-lg" %>
+		<%= link_to "Cancel", topics_path, class: "btn btn-default btn-lg" %>
 	</div>
 <% end %>
