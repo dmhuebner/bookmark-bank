@@ -1,7 +1,7 @@
 class Topic < ActiveRecord::Base
 	# Relations
   belongs_to :user
-	has_many :bookmarks
+	has_many :bookmarks, dependent: :destroy
 
 	# Validations
 	validates :title, length: {minimum: 2, maximum: 200}, presence: true
@@ -9,4 +9,5 @@ class Topic < ActiveRecord::Base
 
 	# Scope
 	default_scope {order('title')}
+
 end

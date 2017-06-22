@@ -10,8 +10,8 @@
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		<hr />
-		<ul class="bookmark-list">
-			<li>Bookmarks go here</li>
-		</ul>
+		<% @topic.bookmarks.each do |b| %>
+		<h4><%= link_to b.url, b.url, target: "_blank" %></h4>
+		<% end %>
 	</div>
 </div>
