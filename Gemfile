@@ -35,3 +35,5 @@ end
 gem 'bootstrap-sass'
 # Devise
 gem 'devise'
+# Image processing
+# gem 'dragonfly'

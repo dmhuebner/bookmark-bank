@@ -13,8 +13,12 @@
 <body>
 	<div class="container">
 		<ul class="nav nav-tabs">
-			<li><%= link_to "Bookmark Bank", root_path, class: "navbar-brand" %></li>
-			<li><%= link_to "About", about_path, class: "navbar-brand" %></li>
+			<% if user_signed_in? %>
+				<li><%= link_to "My Bookmark Bank", topics_path, class: "navbar-brand" %></li>
+			<% else %>
+				<li><%= link_to "Bookmark Bank", root_path, class: "navbar-brand" %></li>
+				<li><%= link_to "About", about_path, class: "navbar-brand" %></li>
+			<% end %>
 			<% if user_signed_in? %>
 				<ul class="navbar-right">
 					<strong>Welcome <%= current_user.name %>!</strong>
