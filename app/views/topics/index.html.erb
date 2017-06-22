@@ -1,0 +1,18 @@
+<header class="row">
+	<div class="col-sm-4">
+	</div>
+	<div class="col-sm-4">
+		<h1 class="text-center topics-heading">My Topics</h1>
+	</div>
+	<div class="col-sm-4">
+		<%= link_to "New Topic", new_topic_path, class: "btn btn-primary btn-lg new-topic-btn" %>
+	</div>
+</header>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<hr />
+		<% @topics.each do |t| %>
+			<h3><%= link_to t.title, t %></h3>
+		<% end %>
+	</div>
+</div>
