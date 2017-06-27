@@ -32,6 +32,12 @@ module RandomData
 		letters[0, rand(3..8)].join
 	end
 
+	def self.random_url
+		letters = ('a'..'z').to_a
+		letters.shuffle!
+		output = 'http://' + letters[0, rand(3..13)].join + '.com'
+	end
+
 	def self.random_password
 		letters = ('a'..'z').to_a
 		letters.shuffle!

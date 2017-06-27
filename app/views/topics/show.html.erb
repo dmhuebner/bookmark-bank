@@ -10,6 +10,8 @@
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		<hr />
+		<div class="text-center"><%= link_to "Add Bookmark", new_topic_bookmark_path(@topic), class: "btn btn-primary btn-lg" %></div>
+		<hr />
 		<% @topic.bookmarks.each do |b| %>
 		<h4><%= link_to b.url, b.url, target: "_blank" %></h4>
 		<% end %>

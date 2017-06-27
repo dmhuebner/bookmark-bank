@@ -1,2 +1,7 @@
-<h1>Bookmarks#new</h1>
-<p>Find me in app/views/bookmarks/new.html.erb</p>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<h3 class="text-center">Add New Bookmark</h3>
+		<br />
+		<%= render partial: 'form', locals: {topic: @topic, bookmark: @bookmark} %>
+	</div>
+</div>

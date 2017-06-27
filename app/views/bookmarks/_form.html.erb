@@ -1,0 +1,21 @@
+<%= form_for [topic, bookmark] do |f| %>
+	<% if bookmark.errors.any? %>
+		<div class="alert alert-danger">
+			<a href="#" data-dismiss="alert" class="close">&times;</a>
+			<h4><%= pluralize(bookmark.errors.count, "Error") %>:</h4>
+			<ul>
+				<% bookmark.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
+	<%= form_group_tag(bookmark.errors[:url]) do %>
+		<%= f.label :url, class: "sr-only" %>
+		<%= f.text_field :url, class: "form-control input-lg", placeholder: "Enter url of bookmark" %>
+	<% end %>
+	<div class="form-group text-center">
+		<%= f.submit "Save", class: "btn btn-primary btn-lg" %>
+		<%= link_to "Cancel", topic_path(topic), class: "btn btn-default btn-lg" %>
+	</div>
+<% end %>
