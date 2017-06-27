@@ -10,9 +10,17 @@
 			</ul>
 		</div>
 	<% end %>
+	<%= form_group_tag(bookmark.errors[:name]) do %>
+		<%= f.label :name, class: "sr-only" %>
+		<%= f.text_field :name, class: "form-control input-lg", placeholder: "Enter name for bookmark" %>
+	<% end %>
 	<%= form_group_tag(bookmark.errors[:url]) do %>
 		<%= f.label :url, class: "sr-only" %>
-		<%= f.text_field :url, class: "form-control input-lg", placeholder: "Enter url of bookmark" %>
+		<%= f.text_field :url, class: "form-control input-lg", placeholder: "Enter URL of bookmark" %>
+	<% end %>
+	<%= form_group_tag(bookmark.errors[:description]) do %>
+		<%= f.label :description, class: "sr-only" %>
+		<%= f.text_field :description, class: "form-control input-lg", placeholder: "Short description (optional)" %>
 	<% end %>
 	<div class="form-group text-center">
 		<%= f.submit "Save", class: "btn btn-primary btn-lg" %>

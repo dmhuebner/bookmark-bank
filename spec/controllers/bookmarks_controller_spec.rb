@@ -43,16 +43,36 @@ RSpec.describe BookmarksController, type: :controller do
 
 		describe "POST #create" do
 			it "increases the number of bookmarks by 1" do
-				expect(post :create, {bookmark: {url: RandomData.random_url, topic_id: my_topic.id}})
+				expect{post :create, topic_id: my_topic.id, bookmark: {url: RandomData.random_url, description: RandomData.random_sentence, name: RandomData.random_word, topic_id: my_topic.id}}.to change(Bookmark, :count).by(1)
+			end
+			it "assigns Bookmark.last to @bookmark" do
+				post :create, topic_id: my_topic.id, bookmark: {name: RandomData.random_word, url: RandomData.random_url, description: RandomData.random_sentence, topic_id: my_topic.id}
+				expect(assigns(:bookmark)).to eq(Bookmark.last)
+			end
+			it "redirects to the bookmarks topic show view" do
+				post :create, topic_id: my_topic.id, bookmark: {name: RandomData.random_word, url: RandomData.random_url, description: RandomData.random_sentence, topic_id: my_topic.id}
+				expect(response).to redirect_to(Bookmark.last.topic)
 			end
 		end
 
-	  # describe "GET #edit" do
-	  #   it "returns http success" do
-	  #     get :edit
-	  #     expect(response).to have_http_status(:success)
-	  #   end
-	  # end
+	  describe "GET #edit" do
+	    it "returns http success" do
+	      get :edit, topic_id: my_topic.id, id: my_bookmark.id
+	      expect(response).to have_http_status(:success)
+	    end
+			it "renders the #edit view" do
+				get :edit, topic_id: my_topic.id, id: my_bookmark.id
+				expect(response).to render_template :edit
+			end
+			it "assigns the bookmark to be updated to @bookmark" do
+				get :edit, topic_id: my_topic.id, id: my_bookmark.id
+				bookmark_instance = assigns(:bookmark)
+				expect(bookmark_instance.id).to eq(my_bookmark.id)
+				expect(bookmark_instance.name).to eq(my_bookmark.name)
+				expect(bookmark_instance.description).to eq(my_bookmark.description)
+				expect(bookmark_instance.topic).to eq(my_bookmark.topic)
+			end
+	  end
 	end
 
 end

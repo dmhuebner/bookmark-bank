@@ -11,11 +11,17 @@ RSpec.describe Bookmark, type: :model do
 	# Shoulda Validation tests
 	it {should validate_presence_of(:url)}
 	it {should validate_presence_of(:topic)}
+	it {should validate_presence_of(:name)}
+	# description attribute optional
+	# it {should validate_presence_of(:description)}
+
 	it {should validate_length_of(:url).is_at_least(3)}
+	it {should validate_length_of(:name).is_at_least(1)}
+	it {should validate_length_of(:description).is_at_most(100)}
 
 	describe "attributes" do
-		it "has url attribute" do
-			expect(bookmark).to have_attributes(url: bookmark.url)
+		it "has url and description attributes" do
+			expect(bookmark).to have_attributes(url: bookmark.url, description: bookmark.description, name: bookmark.name)
 		end
 	end
 end
