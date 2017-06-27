@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe BookmarksController, type: :controller do
 	let(:my_user) {create(:user)}
-	let(:my_topic) {create(:topic)}
-	let(:my_bookmark) {create(:bookmark)}
+	let(:my_topic) {create(:topic, user: my_user)}
+	let(:my_bookmark) {create(:bookmark, topic: my_topic)}
 
 	context "signed in user" do
 		before do
@@ -57,7 +57,7 @@ RSpec.describe BookmarksController, type: :controller do
 
 	  describe "GET #edit" do
 	    it "returns http success" do
-	      get :edit, topic_id: my_topic.id, id: my_bookmark.id
+				get :edit, topic_id: my_topic.id, id: my_bookmark.id
 	      expect(response).to have_http_status(:success)
 	    end
 			it "renders the #edit view" do
@@ -73,6 +73,39 @@ RSpec.describe BookmarksController, type: :controller do
 				expect(bookmark_instance.topic).to eq(my_bookmark.topic)
 			end
 	  end
+
+		describe "PUT #update" do
+			it "updates post with expected attributes" do
+				new_name = RandomData.random_word
+				new_url = RandomData.random_url
+				new_description = RandomData.random_sentence
+				put :update, topic_id: my_topic.id, id: my_bookmark.id, bookmark: {name: new_name, url: new_url, description: new_description}
+				updated_bookmark = assigns(:bookmark)
+				expect(updated_bookmark.id).to eq(my_bookmark.id)
+				expect(updated_bookmark.name).to eq(new_name)
+				expect(updated_bookmark.url).to eq(new_url)
+				expect(updated_bookmark.description).to eq(new_description)
+			end
+			it "redirects to the topic show view of the updated bookmark" do
+				new_name = RandomData.random_word
+				new_url = RandomData.random_url
+				new_description = RandomData.random_sentence
+				put :update, topic_id: my_topic.id, id: my_bookmark.id, bookmark: {name: new_name, url: new_url, description: new_description}
+				expect(response).to redirect_to my_topic
+			end
+		end
+
+		describe "DELETE #destroy" do
+			it "deletes the bookmark" do
+				delete :destroy, topic_id: my_topic.id, id: my_bookmark.id
+				count = Bookmark.where(id: my_bookmark.id).size
+				expect(count).to eq(0)
+			end
+			it "redirects to the topic's show view" do
+				delete :destroy, topic_id: my_topic.id, id: my_bookmark.id
+				expect(response).to redirect_to my_topic
+			end
+		end
 	end
 
 end
