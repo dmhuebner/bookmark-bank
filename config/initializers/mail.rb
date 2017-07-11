@@ -3,7 +3,7 @@ ActionMailer::Base.smtp_settings = {
 	address: 'smtp.mailgun.org',
 	user_name: ENV['MAILGUN_SMTP_LOGIN'],
 	password: ENV['MAILGUN_SMTP_PASSWORD'],
-	domain: 'appf5aa8af658bf41ff8d1f5df85e664929.mailgun.org',
+	domain: 'cryptic-mesa-14898.herokuapp.com',
 	authentication: :plain,
 	content_type: 'text/html'
 }
@@ -18,7 +18,7 @@ ActionMailer::Base.raise_delivery_errors = true
 # http://edgeguides.rubyonrails.org/action_mailer_basics.html#intercepting-emails
 class DevelopmentMailInterceptor
   def self.delivering_email(message)
-    message.to =  'youremail@website.com'
+    message.to =  'davidmh.mail@gmail.com'
     message.cc = nil
     message.bcc = nil
   end
