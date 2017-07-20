@@ -4,5 +4,5 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
 	# Devise Authenticate user
-	before_action :authenticate_user!, except: [:index, :about]
+	before_action :authenticate_user!, except: [:index, :about, :incoming]
 end
