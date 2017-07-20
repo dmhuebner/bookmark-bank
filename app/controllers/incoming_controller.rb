@@ -11,27 +11,34 @@ class IncomingController < ApplicationController
 		# You put the message-splitting and business
 		# magic here.
 
-		user = User.find_by_email(params[:sender])
-		subject = params[:subject]
-		content = params[:'body-plain']
-		url = content.scan(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/)[0][0]
+		bookmark = Bookmark.create(name: RandomData.random_word, description: RandomData.random_paragraph, topic_id: 1, url: "http://google.com")
 
-		topics = []
-
-		subject.scan(/\B#([^,\#]+)/).each do |topic|
-			topics.push(Topic.find_or_create_by(title: topic))
-		end
-
-		bookmark = user.bookmarks.create(url: url)
-
-		if bookmark.save
-			topics.each do |topic|
-        Topic.create(bookmark_id: bookmark.id, topic_id: topic.id)
-      end
-			# Assuming all went well.
+		if bookmark.saved
 			head 200
 		else
 			head :no_content
 		end
+
+		# user = User.find_by_email(params[:sender])
+		# subject = params[:subject]
+		# content = params[:'body-plain']
+		# url = content.scan(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/)[0][0]
+		#
+		# topics = []
+		#
+		# subject.scan(/\B#([^,\#]+)/).each do |topic|
+		# 	topics.push(Topic.find_or_create_by(title: topic))
+		# end
+		#
+		# bookmark = user.bookmarks.build(url: url)
+		#
+		# if bookmark.save
+		# 	topics.each do |topic|
+    #     Topic.create(bookmark_id: bookmark.id, topic_id: topic.id)
+    #   end
+		# 	head 200
+		# else
+		# 	head :no_content
+		# end
 	end
 end

@@ -5,8 +5,7 @@ class Bookmark < ActiveRecord::Base
 	# Validations
 	validates :url, length: {minimum: 3}, presence: true
 	validates :description, length: {maximum: 100}
-	validates :name, length: {minimum: 1}
-	#, presence: true
+	validates :name, length: {minimum: 1}, presence: true
 	validates :topic, presence: true
 
 	# Scope
