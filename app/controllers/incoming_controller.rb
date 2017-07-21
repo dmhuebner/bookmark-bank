@@ -15,8 +15,9 @@ class IncomingController < ApplicationController
 
 		@user = User.find_by(email: params[:sender])
     @topic = Topic.find_by(title: params[:subject])
-    @url = params["body-plain"]
-		@name = params["body-plain"]
+		content = params["body-plain"]
+    @url = content.scan(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/)[0][0]
+		@name = content.scan(/name:+/)
 
     if @user.nil?
       @user = User.new(email: params[:sender], password: "t3mp0r@ry_p@ssw0rd")
@@ -28,7 +29,7 @@ class IncomingController < ApplicationController
       @topic = @user.topics.create(title: params[:subject])
     end
 
-    @bookmark = @topic.bookmarks.create(url: @url, name: @name)
+    @bookmark = @topic.bookmarks.create(url: @url, name: @name, description: "Enter a description")
 
     head 200
 
