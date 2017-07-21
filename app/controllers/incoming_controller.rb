@@ -16,8 +16,13 @@ class IncomingController < ApplicationController
 		@user = User.find_by(email: params[:sender])
     @topic = Topic.find_by(title: params[:subject])
 		content = params["body-plain"]
+		# Extracts URL from content
     @url = content.scan(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/)[0][0]
-		@name = content.scan(/name:+/)
+		# Extracts URL name from content
+		raw_name = content.scan(/name:.*/i)
+		@name = raw_name.slice(5, raw_name.length)
+
+		@name = @name.slice(1, @name.length) if @name[0] == ' '
 
     if @user.nil?
       @user = User.new(email: params[:sender], password: "t3mp0r@ry_p@ssw0rd")
