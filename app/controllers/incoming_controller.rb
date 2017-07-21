@@ -19,7 +19,7 @@ class IncomingController < ApplicationController
 		# Extracts URL from content
     @url = content.scan(/((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/)[0][0]
 		# Extracts URL name from content
-		raw_name = content.scan(/name:.*/i)
+		raw_name = content.scan(/name:.*/i)[0]
 		@name = raw_name.slice(5, raw_name.length)
 
 		@name = @name.slice(1, @name.length) if @name[0] == ' '
