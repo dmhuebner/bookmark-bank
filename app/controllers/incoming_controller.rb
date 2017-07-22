@@ -25,7 +25,7 @@ class IncomingController < ApplicationController
 		@name = @name.slice(1, @name.length) if @name[0] == ' '
 
     if @user.nil?
-      @user = User.new(email: params[:sender], password: "t3mp0r@ry_p@ssw0rd")
+      @user = User.new(email: params[:sender], password: "t3mp0r@ry_p@ssw0rd", name: "New User")
       @user.skip_confirmation!
       @user.save!
     end
