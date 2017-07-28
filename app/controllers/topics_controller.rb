@@ -13,6 +13,8 @@ class TopicsController < ApplicationController
 
   def edit
 		@topic = Topic.find(params[:id])
+		# Pundit Authorization
+		authorize @topic
   end
 
 	def create
@@ -30,6 +32,8 @@ class TopicsController < ApplicationController
 
 	def update
 		@topic = Topic.find(params[:id])
+		# Pundit Authorization
+		authorize @topic
 		@topic.assign_attributes(topic_params)
 
 		if @topic.save
@@ -43,6 +47,8 @@ class TopicsController < ApplicationController
 
 	def destroy
 		@topic = Topic.find(params[:id])
+		# Pundit Authorization
+		authorize @topic
 
 		if @topic.destroy
 			flash[:notice] = "The \"#{@topic.title}\" topic was deleted successfully."

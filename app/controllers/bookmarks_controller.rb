@@ -24,11 +24,15 @@ class BookmarksController < ApplicationController
   def edit
 		@topic = Topic.find(params[:topic_id])
 		@bookmark = @topic.bookmarks.find(params[:id])
+		# Pundit Authorization
+		authorize @bookmark
   end
 
 	def update
 		@topic = Topic.find(params[:topic_id])
 		@bookmark = @topic.bookmarks.find(params[:id])
+		# Pundit Authorization
+		authorize @bookmark
 		@bookmark.topic = @topic
 		@bookmark.assign_attributes(bookmark_params)
 
@@ -44,6 +48,8 @@ class BookmarksController < ApplicationController
 	def destroy
 		@topic = Topic.find(params[:topic_id])
 		@bookmark = @topic.bookmarks.find(params[:id])
+		# Pundit Authorization
+		authorize @bookmark
 
 		if @bookmark.destroy
 			flash[:notice] = "The \"#{@bookmark.name}\" bookmark was deleted successfully."
