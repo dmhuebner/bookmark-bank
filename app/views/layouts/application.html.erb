@@ -14,7 +14,8 @@
 	<div class="container">
 		<ul class="nav nav-tabs">
 			<% if user_signed_in? %>
-				<li><%= link_to "My Bookmark Bank", topics_path, class: "navbar-brand" %></li>
+				<li><%= link_to "Bookmark Bank", topics_path, class: "navbar-brand" %></li>
+				<li><%= link_to "My Bookmarks", my_bookmarks_path, class: "navbar-brand" %></li>
 			<% else %>
 				<li><%= link_to "Bookmark Bank", root_path, class: "navbar-brand" %></li>
 				<li><%= link_to "About", about_path, class: "navbar-brand" %></li>

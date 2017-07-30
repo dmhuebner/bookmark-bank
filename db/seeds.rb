@@ -36,6 +36,7 @@ topics = Topic.all
 50.times do
 	bookmark = Bookmark.create!(
 		topic: topics.sample,
+		user: users.sample,
 		name: RandomData.random_name,
 		url: RandomData.random_url,
 		description: RandomData.random_sentence

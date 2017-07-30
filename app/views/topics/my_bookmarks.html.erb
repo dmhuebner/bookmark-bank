@@ -1,0 +1,23 @@
+<header class="row">
+	<div class="col-sm-4">
+	</div>
+	<div class="col-sm-4">
+		<h1 class="text-center topics-heading">My Bookmarks</h1>
+	</div>
+	<div class="col-sm-4">
+		<%= link_to "New Topic", new_topic_path, class: "btn btn-primary btn-lg new-topic-btn" %>
+	</div>
+</header>
+<div class="row">
+	<div class="col-sm-10 col-sm-offset-1">
+		<hr />
+		<% @bookmarks.each do |b| %>
+		<br />
+			Topic: <%= b.topic.title %><br />
+			<%= b.name %><br />
+			<%= b.url %><br />
+			<%= b.description %><br />
+		<% end %>
+
+	</div>
+</div>

@@ -3,6 +3,11 @@ class TopicsController < ApplicationController
 		@topics = Topic.all
   end
 
+	def my_bookmarks
+		# TODO add logic that limits the topics shown to only topics where a user has a favorite bookmark (or their own bookmark)
+		@bookmarks = current_user.bookmarks
+	end
+
   def show
 		@topic = Topic.find(params[:id])
   end

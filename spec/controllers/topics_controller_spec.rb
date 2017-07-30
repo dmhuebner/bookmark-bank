@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe TopicsController, type: :controller do
 	let(:my_user) {create(:user)}
-	let(:my_topic) {create(:topic)}
+	let(:my_topic) {create(:topic, user: my_user)}
+	let(:my_bookmark) {create(:bookmark, topic: my_topic, user: my_user)}
 
 	context "Signed in user" do
 		before do
@@ -15,11 +16,30 @@ RSpec.describe TopicsController, type: :controller do
 	      get :index
 	      expect(response).to have_http_status(:success)
 	    end
+			it "renders #index view" do
+				get :index
+				expect(response).to render_template(:index)
+			end
 			it "assigns my_topic to @topics" do
 				get :index
 				expect(assigns(:topics)).to eq([my_topic])
 			end
 	  end
+
+		describe "GET #my_bookmarks" do
+			it "returns http success" do
+				get :my_bookmarks
+				expect(response).to have_http_status(:success)
+			end
+			it "renders the #my_bookmarks view" do
+				get :my_bookmarks
+				expect(response).to render_template(:my_bookmarks)
+			end
+			it "assigns my_topic to @bookmarks" do
+				get :my_bookmarks
+				expect(assigns(:bookmarks)).to eq([my_bookmark])
+			end
+		end
 
 	  describe "GET #show" do
 	    it "returns http success" do

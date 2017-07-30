@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
 	has_many :topics
+	has_many :bookmarks
 
 	validates :name, length: {minimum: 1, maximum: 100}, presence: true
 end
