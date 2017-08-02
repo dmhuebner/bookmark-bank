@@ -6,6 +6,17 @@ class TopicsController < ApplicationController
 	def my_bookmarks
 		# TODO add logic that limits the topics shown to only topics where a user has a favorite bookmark (or their own bookmark)
 		@bookmarks = current_user.bookmarks
+
+		@topics = []
+
+		@bookmarks.each do |b|
+			if !@topics.include?(b.topic)
+				@topics.push(b.topic)
+			end
+		end
+
+		# Pundit Authorization
+		authorize @topics
 	end
 
   def show

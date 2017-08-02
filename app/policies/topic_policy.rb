@@ -4,4 +4,8 @@ class TopicPolicy < ApplicationPolicy
       scope
     end
   end
+
+	def my_bookmarks?
+		user.present?
+	end
 end

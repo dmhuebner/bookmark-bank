@@ -10,7 +10,7 @@ require 'random_data'
 end
 
 test_user = User.create!(
-	name: "test User",
+	name: "Test User",
 	email: "test@example.com",
 	password: "helloworld"
 )
