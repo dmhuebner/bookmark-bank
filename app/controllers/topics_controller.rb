@@ -4,7 +4,6 @@ class TopicsController < ApplicationController
   end
 
 	def my_bookmarks
-		# TODO add logic that limits the topics shown to only topics where a user has a favorite bookmark (or their own bookmark)
 		@bookmarks = current_user.bookmarks
 
 		@topics = []
@@ -16,7 +15,7 @@ class TopicsController < ApplicationController
 		end
 
 		# Pundit Authorization
-		authorize @topics
+		authorize Topic
 	end
 
   def show
@@ -25,6 +24,8 @@ class TopicsController < ApplicationController
 
   def new
 		@topic = Topic.new
+		# Pundit Authorization
+		authorize @topic
   end
 
   def edit
@@ -37,8 +38,11 @@ class TopicsController < ApplicationController
 		@topic = Topic.new(topic_params)
 		@topic.user = current_user
 
+		# Pundit Authorization
+		authorize @topic
+
 		if @topic.save
-			flash[:notice] = "Topic was save successfully."
+			flash[:notice] = "Topic was saved successfully."
 			redirect_to @topic
 		else
 			flash[:alert] = "There was an error saving the topic. Please try again."

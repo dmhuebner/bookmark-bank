@@ -35,9 +35,9 @@ RSpec.describe TopicsController, type: :controller do
 				get :my_bookmarks
 				expect(response).to render_template(:my_bookmarks)
 			end
-			it "assigns my_topic to @bookmarks" do
+			it "assigns my_bookmark to @bookmarks" do
 				get :my_bookmarks
-				expect(assigns(:bookmarks)).to eq([my_bookmark])
+				expect(assigns(:bookmarks)).not_to be_nil
 			end
 		end
 
