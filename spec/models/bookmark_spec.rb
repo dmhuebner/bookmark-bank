@@ -7,10 +7,12 @@ RSpec.describe Bookmark, type: :model do
 
 	# Shoulda Relational tests
 	it {should belong_to(:topic)}
+	it {should belong_to(:user)}
 
 	# Shoulda Validation tests
 	it {should validate_presence_of(:url)}
 	it {should validate_presence_of(:topic)}
+	it {should validate_presence_of(:user)}
 	it {should validate_presence_of(:name)}
 	# description attribute optional
 	# it {should validate_presence_of(:description)}

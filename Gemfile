@@ -33,7 +33,9 @@ end
 
 # Bootstrap
 gem 'bootstrap-sass'
-# Devise
+# Devise - User Authentication
 gem 'devise'
+# Pundit - Authorization
+gem 'pundit'
 # Image processing
 # gem 'dragonfly'

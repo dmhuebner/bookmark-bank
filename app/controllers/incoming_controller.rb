@@ -5,12 +5,9 @@ class IncomingController < ApplicationController
 	skip_before_action :authenticate_user!
 
 	def create
-		# Take a look at these in your server logs
-		# to get a sense of what you're dealing with.
 		#puts "INCOMING PARAMS HERE: #{params}"
 
-		# You put the message-splitting and business
-		# magic here.
+		# Message parsing and business magic here.
 
 
 		@user = User.find_by(email: params[:sender])
@@ -34,7 +31,7 @@ class IncomingController < ApplicationController
       @topic = @user.topics.create(title: params[:subject])
     end
 
-    @bookmark = @topic.bookmarks.create(url: @url, name: @name, description: "Enter a description")
+    @bookmark = @topic.bookmarks.create(url: @url, name: @name, description: "Enter a description", user: @user)
 
     head 200
 

@@ -14,4 +14,7 @@ Rails.application.routes.draw do
 
 	root 'welcome#index'
 
+	# Custom Routes
+	get 'my_bookmarks' => 'topics#my_bookmarks'
+
 end

@@ -16,7 +16,7 @@
 	<% end %>
 	<%= form_group_tag(bookmark.errors[:url]) do %>
 		<%= f.label :url, class: "sr-only" %>
-		<%= f.text_field :url, class: "form-control input-lg", placeholder: "Enter URL of bookmark" %>
+		<%= f.text_field :url, class: "form-control input-lg", placeholder: "http://..." %>
 	<% end %>
 	<%= form_group_tag(bookmark.errors[:description]) do %>
 		<%= f.label :description, class: "sr-only" %>

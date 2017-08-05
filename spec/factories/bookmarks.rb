@@ -4,5 +4,6 @@ FactoryGirl.define do
     url "http://example.com"
 		description RandomData.random_sentence
     topic
+		user
   end
 end

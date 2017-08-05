@@ -10,7 +10,7 @@ require 'random_data'
 end
 
 test_user = User.create!(
-	name: "test User",
+	name: "Test User",
 	email: "test@example.com",
 	password: "helloworld"
 )
@@ -36,6 +36,7 @@ topics = Topic.all
 50.times do
 	bookmark = Bookmark.create!(
 		topic: topics.sample,
+		user: users.sample,
 		name: RandomData.random_name,
 		url: RandomData.random_url,
 		description: RandomData.random_sentence

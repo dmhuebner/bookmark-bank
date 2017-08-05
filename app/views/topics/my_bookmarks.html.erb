@@ -2,7 +2,7 @@
 	<div class="col-sm-4">
 	</div>
 	<div class="col-sm-4">
-		<h1 class="text-center topics-heading">Bookmark Topics</h1>
+		<h1 class="text-center topics-heading">My Bookmarks</h1>
 	</div>
 	<div class="col-sm-4">
 		<%= link_to "New Topic", new_topic_path, class: "btn btn-primary btn-lg new-topic-btn" %>
@@ -11,16 +11,20 @@
 <div class="row">
 	<div class="col-sm-10 col-sm-offset-1">
 		<hr />
+
+		<h3 class="text-center">Bookmarks I Created</h3>
 		<% @topics.each do |t| %>
 		<div class="row">
 			<div class="col-sm-10">
 				<h3><%= link_to t.title, t %></h3>
-				<% t.bookmarks.each do |b| %>
-					<div class="col-sm-1 pull-right">
-						<%= link_to "Edit", edit_topic_bookmark_path(t, b), class: "btn btn-default btn-xs" %>
-					</div>
-					<!-- Show hide buttons below for use with UI later -->
-					<h4 class="topic-bookmark"><%= link_to b.name, topic_bookmark_path(b.topic, b) %> - <%= link_to b.url, b.url, target: "_blank", class: "full-url" %> <span class="show-hide-btns"><a href="#" class="btn btn-default btn-xs view-url-btn hide">View URL</a><a href="#" class="btn btn-default btn-xs view-url-btn hide">Hide URL</a></span><small class="text-muted"> - <%= b.description %></small></h4>
+				<% @bookmarks.each do |b| %>
+					<% if b.topic == t %>
+						<div class="col-sm-1 pull-right">
+							<%= link_to "Edit", edit_topic_bookmark_path(t, b), class: "btn btn-default btn-xs" %>
+						</div>
+						<!-- Show hide buttons below for use with UI later -->
+						<h4 class="topic-bookmark"><%= link_to b.name, topic_bookmark_path(b.topic, b)%> - <%= link_to b.url, b.url, target: "_blank", class: "full-url" %> <span class="show-hide-btns"><a href="#" class="btn btn-default btn-xs view-url-btn hide">View URL</a><a href="#" class="btn btn-default btn-xs view-url-btn hide">Hide URL</a></span><small class="text-muted"> - <%= b.description %></small></h4>
+					<% end %>
 				<% end %>
 			</div>
 			<div class="col-sm-2">
@@ -31,5 +35,7 @@
 		</div>
 		<hr />
 		<% end %>
+		<!-- <h3 class="text-center">Bookmarks I Like</h3> -->
+		<!-- TODO Add logic for liked bookmarks -->
 	</div>
 </div>

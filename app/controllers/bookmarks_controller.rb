@@ -11,6 +11,7 @@ class BookmarksController < ApplicationController
 	def create
 		@topic = Topic.find(params[:topic_id])
 		@bookmark = @topic.bookmarks.build(bookmark_params)
+		@bookmark.user = current_user
 
 		if @bookmark.save
 			flash[:notice] = "\"#{@bookmark.name}\" bookmark was saved successfully!"
@@ -24,11 +25,15 @@ class BookmarksController < ApplicationController
   def edit
 		@topic = Topic.find(params[:topic_id])
 		@bookmark = @topic.bookmarks.find(params[:id])
+		# Pundit Authorization
+		authorize @bookmark
   end
 
 	def update
 		@topic = Topic.find(params[:topic_id])
 		@bookmark = @topic.bookmarks.find(params[:id])
+		# Pundit Authorization
+		authorize @bookmark
 		@bookmark.topic = @topic
 		@bookmark.assign_attributes(bookmark_params)
 
@@ -44,6 +49,8 @@ class BookmarksController < ApplicationController
 	def destroy
 		@topic = Topic.find(params[:topic_id])
 		@bookmark = @topic.bookmarks.find(params[:id])
+		# Pundit Authorization
+		authorize @bookmark
 
 		if @bookmark.destroy
 			flash[:notice] = "The \"#{@bookmark.name}\" bookmark was deleted successfully."
@@ -57,6 +64,6 @@ class BookmarksController < ApplicationController
 	private
 
 	def bookmark_params
-		params.require(:bookmark).permit(:name, :url, :description, :topic_id)
+		params.require(:bookmark).permit(:name, :url, :description, :topic_id, :user_id)
 	end
 end
