@@ -5,6 +5,8 @@ RSpec.describe User, type: :model do
 
 	# Shoulda relational tests
 	it {should have_many(:topics)}
+	it {should have_many(:bookmarks)}
+	it {should have_many(:likes)}
 
 	# Shoulda attribute validattion
 	it {should validate_presence_of(:name)}

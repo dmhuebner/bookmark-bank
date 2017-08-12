@@ -4,10 +4,12 @@ RSpec.describe Bookmark, type: :model do
 	let(:user) {create(:user)}
 	let(:topic) {create(:topic)}
 	let(:bookmark) {create(:bookmark)}
+	let(:like) {create(:like, user: user, bookmark: bookmark)}
 
 	# Shoulda Relational tests
 	it {should belong_to(:topic)}
 	it {should belong_to(:user)}
+	it {should have_many(:likes)}
 
 	# Shoulda Validation tests
 	it {should validate_presence_of(:url)}
@@ -15,8 +17,8 @@ RSpec.describe Bookmark, type: :model do
 	it {should validate_presence_of(:user)}
 	it {should validate_presence_of(:name)}
 	# description attribute optional
-	# it {should validate_presence_of(:description)}
 
+	# it {should validate_presence_of(:description)}
 	it {should validate_length_of(:url).is_at_least(3)}
 	it {should validate_length_of(:name).is_at_least(1)}
 	it {should validate_length_of(:description).is_at_most(100)}

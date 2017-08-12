@@ -15,6 +15,8 @@ RSpec.describe BookmarksController, type: :controller do
 		other_user.confirm
 	end
 
+	# TODO create context for guest user
+
 	context "signed in user" do
 		before do
 			sign_in my_user

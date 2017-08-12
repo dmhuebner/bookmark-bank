@@ -5,6 +5,8 @@ RSpec.describe TopicsController, type: :controller do
 	let(:my_topic) {create(:topic, user: my_user)}
 	let(:my_bookmark) {create(:bookmark, topic: my_topic, user: my_user)}
 
+	# TODO add context for guest user
+
 	context "Signed in user" do
 		before do
 			my_user.confirm
@@ -75,7 +77,7 @@ RSpec.describe TopicsController, type: :controller do
 			it "increases the number of topics by 1" do
 				expect{post :create, {topic: {title: RandomData.random_sentence, user_id: my_user.id}}}.to change(Topic, :count).by(1)
 			end
-			it "assigns Topic.last to @wiki" do
+			it "assigns Topic.last to @topic" do
 				post :create, {topic: {title: RandomData.random_sentence, user_id: my_user.id}}
 				expect(assigns(:topic)).to eq(Topic.last)
 			end
