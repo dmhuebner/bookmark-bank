@@ -12,8 +12,7 @@ class User < ActiveRecord::Base
 	# Validations
 	validates :name, length: {minimum: 1, maximum: 100}, presence: true
 
-	private
 	def liked(bookmark)
-		bookmark.where(bookmark_id: bookmark.id).first
+		likes.where(bookmark_id: bookmark.id).first
 	end
 end

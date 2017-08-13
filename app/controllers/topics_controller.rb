@@ -6,9 +6,13 @@ class TopicsController < ApplicationController
 	def my_bookmarks
 		@bookmarks = current_user.bookmarks
 
+		@liked_bookmarks = []
+
+		current_user.likes.each {|l| @liked_bookmarks.push(l.bookmark)}
+
 		@topics = []
 
-		@bookmarks.each do |b|
+		@liked_bookmarks.each do |b|
 			if !@topics.include?(b.topic)
 				@topics.push(b.topic)
 			end

@@ -20,7 +20,7 @@
 						<%= link_to "Edit", edit_topic_bookmark_path(t, b), class: "btn btn-default btn-xs" %>
 					</div>
 					<!-- Show hide buttons below for use with UI later -->
-					<h4 class="topic-bookmark"><%= link_to b.name, topic_bookmark_path(b.topic, b) %> - <%= link_to b.url, b.url, target: "_blank", class: "full-url" %> <span class="show-hide-btns"><a href="#" class="btn btn-default btn-xs view-url-btn hide">View URL</a><a href="#" class="btn btn-default btn-xs view-url-btn hide">Hide URL</a></span><small class="text-muted"> - <%= b.description %></small></h4>
+					<h4 class="topic-bookmark"><%= render partial: 'likes/like', locals: {topic: b.topic, bookmark: b} %>&nbsp;<%= link_to b.name, topic_bookmark_path(b.topic, b) %> - <%= link_to b.url, b.url, target: "_blank", class: "full-url" %> <span class="show-hide-btns"><a href="#" class="btn btn-default btn-xs view-url-btn hide">View URL</a><a href="#" class="btn btn-default btn-xs view-url-btn hide">Hide URL</a></span><small class="text-muted"> - <%= b.description %></small></h4>
 				<% end %>
 			</div>
 			<div class="col-sm-2">
