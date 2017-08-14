@@ -11,52 +11,46 @@
 
 		<h2 class="text-center">Bookmarks I Like</h2>
 		<hr />
-		<% @liked_bookmark_topics.each do |t| %>
+		<% @liked_bookmark_topics.sort_by {|t| t.title}.each do |t| %>
 		<div class="row">
-			<div class="col-sm-10">
-				<h3><%= link_to t.title, t %></h3>
-				<% @liked_bookmarks.each do |b| %>
-					<% if b.topic == t %>
-						<div class="col-sm-1 pull-right">
-							<%= link_to "Edit", edit_topic_bookmark_path(t, b), class: "btn btn-default btn-xs" %>
-						</div>
-						<!-- Show hide buttons below for use with UI later -->
-						<h4 class="topic-bookmark"><%= render partial: 'likes/like', locals: {topic: b.topic, bookmark: b} %>&nbsp;<%= link_to b.name, topic_bookmark_path(b.topic, b)%> - <%= link_to b.url, b.url, target: "_blank", class: "full-url" %> <span class="show-hide-btns"><a href="#" class="btn btn-default btn-xs view-url-btn hide">View URL</a><a href="#" class="btn btn-default btn-xs view-url-btn hide">Hide URL</a></span><small class="text-muted"> - <%= b.description %></small></h4>
+			<div class="col-sm-12">
+				<h3 class="bookmark-topic-title"><%= link_to t.title, t %>&nbsp;&nbsp;<%= link_to "Add Bookmark", new_topic_bookmark_path(t), class: "btn btn-primary pull-right", style: "display: inline-block" %></h3>
+				<ul>
+					<% @liked_bookmarks.each do |b| %>
+						<% if b.topic == t %>
+							<div class="control-btn-group pull-right">
+								<%= render partial: 'likes/like', locals: {topic: b.topic, bookmark: b} %>&nbsp;
+								<%= link_to "Edit", edit_topic_bookmark_path(t, b), class: "btn btn-default btn-xs" %>
+							</div>
+							<!-- Show hide buttons below for use with UI later -->
+							<h4 class="topic-bookmark"><li><%= link_to b.name, topic_bookmark_path(b.topic, b)%> - <%= link_to b.url, b.url, target: "_blank", class: "full-url" %> <span class="show-hide-btns"><a href="#" class="btn btn-default btn-xs view-url-btn hide">View URL</a><a href="#" class="btn btn-default btn-xs view-url-btn hide">Hide URL</a></span><small class="text-muted"> - <%= b.description %></small></li></h4>
+						<% end %>
 					<% end %>
-				<% end %>
-			</div>
-			<div class="col-sm-2">
-				<%= link_to "Add Bookmark", new_topic_bookmark_path(t), class: "btn btn-primary", style: "display: inline-block" %>
-				<!-- <%= link_to "Edit Topic", edit_topic_path(t), class: "btn btn-default btn-xs edit-topic-btn" %> -->
-				<!-- <%= link_to "Delete", t, method: :delete, class: "btn btn-danger btn-xs delete-topic-btn", data: {confirm: "Are you sure you want to delete the topic, \"#{t.title}\"?"} %> -->
+				</ul>
 			</div>
 		</div>
 		<hr />
 		<% end %>
 		<div class="jumbotron"><h3 class="text-center">Bookmarks I Created</h3></div>
-		<% @topics.each do |t| %>
+		<% @topics.sort_by {|t| t.title}.each do |t| %>
 		<div class="row">
-			<div class="col-sm-10">
-				<h3><%= link_to t.title, t %></h3>
-				<% @bookmarks.each do |b| %>
-					<% if b.topic == t %>
-						<div class="col-sm-1 pull-right">
-							<%= link_to "Edit", edit_topic_bookmark_path(t, b), class: "btn btn-default btn-xs" %>
-						</div>
-						<!-- Show hide buttons below for use with UI later -->
-						<h4 class="topic-bookmark"><%= render partial: 'likes/like', locals: {topic: b.topic, bookmark: b} %>&nbsp;<%= link_to b.name, topic_bookmark_path(b.topic, b)%> - <%= link_to b.url, b.url, target: "_blank", class: "full-url" %> <span class="show-hide-btns"><a href="#" class="btn btn-default btn-xs view-url-btn hide">View URL</a><a href="#" class="btn btn-default btn-xs view-url-btn hide">Hide URL</a></span><small class="text-muted"> - <%= b.description %></small></h4>
+			<div class="col-sm-12">
+				<h3 class="bookmark-topic-title"><%= link_to t.title, t %>&nbsp;&nbsp;<%= link_to "Add Bookmark", new_topic_bookmark_path(t), class: "btn btn-primary pull-right", style: "display: inline-block" %></h3>
+				<ul>
+					<% @bookmarks.each do |b| %>
+						<% if b.topic == t %>
+							<div class="control-btn-group pull-right">
+								<%= render partial: 'likes/like', locals: {topic: b.topic, bookmark: b} %>&nbsp;
+								<%= link_to "Edit", edit_topic_bookmark_path(t, b), class: "btn btn-default btn-xs" %>
+							</div>
+							<!-- Show hide buttons below for use with UI later -->
+							<h4 class="topic-bookmark"><li><%= link_to b.name, topic_bookmark_path(b.topic, b)%> - <%= link_to b.url, b.url, target: "_blank", class: "full-url" %> <span class="show-hide-btns"><a href="#" class="btn btn-default btn-xs view-url-btn hide">View URL</a><a href="#" class="btn btn-default btn-xs view-url-btn hide">Hide URL</a></span><small class="text-muted"> - <%= b.description %></small></li></h4>
+						<% end %>
 					<% end %>
-				<% end %>
-			</div>
-			<div class="col-sm-2">
-				<%= link_to "Add Bookmark", new_topic_bookmark_path(t), class: "btn btn-primary", style: "display: inline-block" %>
-				<!-- <%= link_to "Edit Topic", edit_topic_path(t), class: "btn btn-default btn-xs edit-topic-btn" %> -->
-				<!-- <%= link_to "Delete", t, method: :delete, class: "btn btn-danger btn-xs delete-topic-btn", data: {confirm: "Are you sure you want to delete the topic, \"#{t.title}\"?"} %> -->
+				</ul>
 			</div>
 		</div>
 		<hr />
 		<% end %>
-		<!-- <h3 class="text-center">Bookmarks I Like</h3> -->
-		<!-- TODO Add logic for liked bookmarks -->
 	</div>
 </div>

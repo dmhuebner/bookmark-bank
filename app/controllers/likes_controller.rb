@@ -1,4 +1,7 @@
 class LikesController < ApplicationController
+
+	# TODO implement authorization policy for likes controller
+
   def index
 		@bookmark = Bookmark.find(params[:bookmark_id])
 		@likes = @bookmark.likes

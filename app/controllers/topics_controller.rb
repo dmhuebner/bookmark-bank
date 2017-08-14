@@ -16,8 +16,6 @@ class TopicsController < ApplicationController
 		topics_of_bookmarks(@liked_bookmark_topics, @liked_bookmarks)
 		topics_of_bookmarks(@topics, @bookmarks)
 
-		# TODO implement ordering by title of @liked_bookmark_topics
-
 		# Pundit Authorization
 		authorize Topic
 	end

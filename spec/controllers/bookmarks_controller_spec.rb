@@ -62,7 +62,7 @@ RSpec.describe BookmarksController, type: :controller do
 			end
 			it "creates a new like for @bookmark" do
 				post :create, topic_id: my_topic.id, bookmark: {name: RandomData.random_word, url: RandomData.random_url, description: RandomData.random_sentence, topic_id: my_topic.id}
-				expect(:like).to eq(Like.last)
+				expect(assigns(:like)).to eq(Like.last)
 			end
 			it "redirects to the bookmarks topic show view" do
 				post :create, topic_id: my_topic.id, bookmark: {name: RandomData.random_word, url: RandomData.random_url, description: RandomData.random_sentence, topic_id: my_topic.id}
