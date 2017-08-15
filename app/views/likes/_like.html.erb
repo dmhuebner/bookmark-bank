@@ -1,9 +1,13 @@
-<% if like = current_user.liked(bookmark) %>
-	<%= link_to [topic, bookmark, like], class: "btn btn-sm btn-danger", method: :delete do %>
-		<i class="glyphicon glyphicon-star-empty", title="Unlike this bookmark"></i>&nbsp;Unlike
-	<% end %>
-<% else %>
-	<%= link_to [topic, bookmark, Like.new], class: "btn btn-sm btn-primary", method: :post do %>
-		<i class="glyphicon glyphicon-star", title="Like this bookmark"></i>&nbsp;Like
-	<% end %>
+<% if policy(Like.new).create? %>
+	<div class="like-unlike-div" style="display: inline-block;">
+		<% if like = current_user.liked(bookmark) %>
+			<%= link_to [topic, bookmark, like], class: "btn btn-sm btn-danger", method: :delete do %>
+				<i class="glyphicon glyphicon-star-empty", title="Unlike this bookmark"></i>&nbsp;Unlike
+			<% end %>
+		<% else %>
+			<%= link_to [topic, bookmark, Like.new], class: "btn btn-sm btn-primary", method: :post do %>
+				<i class="glyphicon glyphicon-star", title="Like this bookmark"></i>&nbsp;Like
+			<% end %>
+		<% end %>
+	</div>
 <% end %>

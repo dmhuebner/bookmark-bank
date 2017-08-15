@@ -26,16 +26,20 @@
 				<div class="row">
 					<div class="control-btn-group pull-right">
 						<%= render partial: 'likes/like', locals: {topic: b.topic, bookmark: b} %>&nbsp;
-						<div class="dropdown">
-						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						    Options
+						<div class="dropdown" style="display: inline-block">
+						  <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    More
 						    <span class="caret"></span>
 						  </button>
 						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-								<li class="topic-ctrl-option text-center"><%= link_to "View", topic_bookmark_path(@topic, b) %></li>
+								<li class="topic-ctrl-option text-center"><%= link_to "View Bookmark", topic_bookmark_path(@topic, b) %></li>
 								<li role="separator" class="divider"></li>
-						    <li class="topic-ctrl-option text-center"><%= link_to "Edit", edit_topic_bookmark_path(@topic, b) %></li>
-						    <li class="topic-ctrl-option delete-item text-center"><%= link_to "Delete", topic_bookmark_path(@topic, b), class: "delete-topic-btn", method: :delete, data: {confirm: "Are you sure you want to delete the \"#{b.name}\" bookmark?"} %></li>
+								<% if policy(b).update? %>
+						    	<li class="topic-ctrl-option text-center"><%= link_to "Edit", edit_topic_bookmark_path(@topic, b) %></li>
+								<% end %>
+								<% if policy(b).destroy? %>
+						    	<li class="topic-ctrl-option delete-item text-center"><%= link_to "Delete", topic_bookmark_path(@topic, b), class: "delete-topic-btn", method: :delete, data: {confirm: "Are you sure you want to delete the \"#{b.name}\" bookmark?"} %></li>
+								<% end %>
 						  </ul>
 						</div>
 						<!-- <%= link_to "Edit", edit_topic_bookmark_path(@topic, b), class: "btn btn-default btn-xs" %> -->

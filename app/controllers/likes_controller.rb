@@ -1,16 +1,17 @@
 class LikesController < ApplicationController
 
-	# TODO implement authorization policy for likes controller
-
   def index
 		@bookmark = Bookmark.find(params[:bookmark_id])
 		@likes = @bookmark.likes
+
+		authorize @likes
   end
 
 	def create
 		@bookmark = Bookmark.find(params[:bookmark_id])
 
 		@like = @bookmark.likes.build(user_id: current_user.id)
+		authorize @like
 
 		if @like.save
 			flash[:notice] = "You liked \"#{@bookmark.name}\"!"
@@ -24,6 +25,7 @@ class LikesController < ApplicationController
 	def destroy
 		@bookmark = Bookmark.find(params[:bookmark_id])
 		@like = @bookmark.likes.find(params[:id])
+		authorize @like
 
 		if @like.destroy
 			flash[:notice] = "You have unliked \"#{@bookmark.name}\""
