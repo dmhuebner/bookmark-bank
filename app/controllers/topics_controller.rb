@@ -3,23 +3,6 @@ class TopicsController < ApplicationController
 		@topics = Topic.all
   end
 
-	def my_bookmarks
-		@bookmarks = current_user.bookmarks
-
-		@liked_bookmarks = []
-
-		current_user.likes.each {|l| @liked_bookmarks.push(l.bookmark)}
-
-		@topics = []
-		@liked_bookmark_topics = []
-
-		topics_of_bookmarks(@liked_bookmark_topics, @liked_bookmarks)
-		topics_of_bookmarks(@topics, @bookmarks)
-
-		# Pundit Authorization
-		authorize Topic
-	end
-
   def show
 		@topic = Topic.find(params[:id])
   end

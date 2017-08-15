@@ -10,14 +10,12 @@ Rails.application.routes.draw do
 	end
 
   devise_for :users, controllers: {registrations: "registrations"}
+	resources :users, only: [:show]
 
 	get 'welcome/index'
 
   get 'about', to: 'welcome#about'
 
 	root 'welcome#index'
-
-	# Custom Routes
-	get 'my_bookmarks' => 'topics#my_bookmarks'
 
 end
