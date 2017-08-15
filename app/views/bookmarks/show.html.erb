@@ -1,8 +1,12 @@
 <div class="row">
 	<div class="col-md-10 col-md-offset-1 text-center">
+		<br />
 		<h1><%= @bookmark.name %></h1>
+		<br />
 		<h4><strong>URL: </strong><%= link_to @bookmark.url, @bookmark.url, target: "_blank" %></h4>
+		<br />
 		<p><strong>Description: </strong><%= @bookmark.description %></p>
+		<br />
 		<div>
 			<%= render partial: 'likes/like', locals: {topic: @bookmark.topic, bookmark: @bookmark} %>&nbsp;
 			<div class="dropdown" style="display: inline-block">
