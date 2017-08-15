@@ -1,0 +1,86 @@
+<header class="row jumbotron">
+	<div class="col-sm-8 col-sm-offset-2">
+		<h1 class="text-center topics-heading">My Bookmarks</h1>
+	</div>
+	<div class="col-sm-2">
+		<%= link_to "New Topic", new_topic_path, class: "btn btn-primary btn-lg new-topic-btn" %>
+	</div>
+</header>
+<div class="row">
+	<div class="col-sm-10 col-sm-offset-1">
+
+		<h2 class="text-center">Liked Bookmarks</h2>
+		<hr />
+		<% @liked_bookmark_topics.sort_by {|t| t.title}.each do |t| %>
+		<div class="row">
+			<div class="col-sm-12">
+				<h3 class="bookmark-topic-title"><%= link_to t.title, t %>&nbsp;&nbsp;<%= link_to "Add Bookmark", new_topic_bookmark_path(t), class: "btn btn-primary pull-right", style: "display: inline-block" %></h3>
+				<ul>
+					<% @liked_bookmarks.each do |b| %>
+						<% if b.topic == t %>
+							<div class="control-btn-group pull-right">
+								<%= render partial: 'likes/like', locals: {topic: b.topic, bookmark: b} %>&nbsp;
+								<div class="dropdown" style="display: inline-block">
+								  <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								    More
+								    <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+										<li class="topic-ctrl-option text-center"><%= link_to "View Bookmark", topic_bookmark_path(t, b) %></li>
+										<li role="separator" class="divider"></li>
+										<% if policy(b).update? %>
+								    	<li class="topic-ctrl-option text-center"><%= link_to "Edit", edit_topic_bookmark_path(t, b) %></li>
+										<% end %>
+										<% if policy(b).destroy? %>
+								    	<li class="topic-ctrl-option delete-item text-center"><%= link_to "Delete", topic_bookmark_path(t, b), class: "delete-topic-btn", method: :delete, data: {confirm: "Are you sure you want to delete the \"#{b.name}\" bookmark?"} %></li>
+										<% end %>
+								  </ul>
+								</div>
+							</div>
+							<!-- Show hide buttons below for use with UI later -->
+							<h4 class="topic-bookmark clearfix"><li><%= link_to b.name, topic_bookmark_path(b.topic, b)%> - <%= link_to b.url, b.url, target: "_blank", class: "full-url" %> <span class="show-hide-btns"><a href="#" class="btn btn-default btn-xs view-url-btn hide">View URL</a><a href="#" class="btn btn-default btn-xs view-url-btn hide">Hide URL</a></span><small class="text-muted"> - <%= b.description %></small></li></h4>
+						<% end %>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+		<hr />
+		<% end %>
+		<div class="jumbotron"><h3 class="text-center">Bookmarks I Created</h3></div>
+		<% @topics.sort_by {|t| t.title}.each do |t| %>
+		<div class="row">
+			<div class="col-sm-12">
+				<h3 class="bookmark-topic-title"><%= link_to t.title, t %>&nbsp;&nbsp;<%= link_to "Add Bookmark", new_topic_bookmark_path(t), class: "btn btn-primary pull-right", style: "display: inline-block" %></h3>
+				<ul>
+					<% @bookmarks.each do |b| %>
+						<% if b.topic == t %>
+							<div class="control-btn-group pull-right">
+								<%= render partial: 'likes/like', locals: {topic: b.topic, bookmark: b} %>&nbsp;
+								<div class="dropdown" style="display: inline-block">
+								  <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								    More
+								    <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+										<li class="topic-ctrl-option text-center"><%= link_to "View Bookmark", topic_bookmark_path(t, b) %></li>
+										<li role="separator" class="divider"></li>
+										<% if policy(b).update? %>
+								    	<li class="topic-ctrl-option text-center"><%= link_to "Edit", edit_topic_bookmark_path(t, b) %></li>
+										<% end %>
+										<% if policy(b).destroy? %>
+								    	<li class="topic-ctrl-option delete-item text-center"><%= link_to "Delete", topic_bookmark_path(t, b), class: "delete-topic-btn", method: :delete, data: {confirm: "Are you sure you want to delete the \"#{b.name}\" bookmark?"} %></li>
+										<% end %>
+								  </ul>
+								</div>
+							</div>
+							<!-- Show hide buttons below for use with UI later -->
+							<h4 class="topic-bookmark clearfix"><li><%= link_to b.name, topic_bookmark_path(b.topic, b)%> - <%= link_to b.url, b.url, target: "_blank", class: "full-url" %> <span class="show-hide-btns"><a href="#" class="btn btn-default btn-xs view-url-btn hide">View URL</a><a href="#" class="btn btn-default btn-xs view-url-btn hide">Hide URL</a></span><small class="text-muted"> - <%= b.description %></small></li></h4>
+						<% end %>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+		<hr />
+		<% end %>
+	</div>
+</div>

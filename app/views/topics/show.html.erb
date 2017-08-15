@@ -13,8 +13,12 @@
 			    <span class="caret"></span>
 			  </button>
 			  <ul class="dropdown-menu dropdown-big" aria-labelledby="dropdownMenu1">
-			    <li class="topic-ctrl-option text-center"><%= link_to "Edit Topic", edit_topic_path %></li>
-			    <li class="delete-item topic-ctrl-option text-center"><%= link_to "Delete Topic", @topic, method: :delete, class: "delete-topic-btn", data: {confirm: "Are you sure you want to delete the topic, \"#{@topic.title}\"?"} %></li>
+					<% if policy(@topic).update? %>
+			    	<li class="topic-ctrl-option text-center"><%= link_to "Edit Topic", edit_topic_path %></li>
+					<% end %>
+					<% if policy(@topic).destroy? %>
+			    	<li class="delete-item topic-ctrl-option text-center"><%= link_to "Delete Topic", @topic, method: :delete, class: "delete-topic-btn", data: {confirm: "Are you sure you want to delete the topic, \"#{@topic.title}\"?"} %></li>
+					<% end %>
 			  </ul>
 			</div>
 			<!-- <%= link_to "Edit Topic", edit_topic_path, class: "btn btn-default btn-lg edit-topic-btn topic-ctrl-btn" %> -->

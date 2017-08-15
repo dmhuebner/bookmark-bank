@@ -28,21 +28,6 @@ RSpec.describe TopicsController, type: :controller do
 			end
 	  end
 
-		describe "GET #my_bookmarks" do
-			it "returns http success" do
-				get :my_bookmarks
-				expect(response).to have_http_status(:success)
-			end
-			it "renders the #my_bookmarks view" do
-				get :my_bookmarks
-				expect(response).to render_template(:my_bookmarks)
-			end
-			it "assigns my_bookmark to @bookmarks" do
-				get :my_bookmarks
-				expect(assigns(:bookmarks)).not_to be_nil
-			end
-		end
-
 	  describe "GET #show" do
 	    it "returns http success" do
 	      get :show, {id: my_topic.id}
