@@ -1,28 +1,49 @@
-<!-- TODO re-style view based on my_bookmarks format -->
-<header class="row">
-	<div class="col-sm-10 col-sm-offset-1 text-center">
+<header class="row jumbotron">
+	<div class="col-sm-12 text-center">
 		<h1 class="text-center" style="display: inline-block;"><%= @topic.title %></h1>
-		<span class="pull-right">
-			<%= link_to "Edit Topic", edit_topic_path, class: "btn btn-default btn-lg edit-topic-btn" %>
-			<%= link_to "Delete Topic", @topic, method: :delete, class: "btn btn-danger btn-sm delete-topic-btn", data: {confirm: "Are you sure you want to delete the topic, \"#{@topic.title}\"?"} %>
-		</span>
 	</div>
 </header>
 <div class="row">
-	<div class="col-md-8 col-md-offset-2">
-		<hr />
-		<div class="text-center"><%= link_to "Add Bookmark", new_topic_bookmark_path(@topic), class: "btn btn-primary btn-lg" %></div>
-		<hr />
-		<% @topic.bookmarks.each do |b| %>
-			<div class="row">
-				<div class="col-sm-10">
-					<h4><%= render partial: 'likes/like', locals: {topic: b.topic, bookmark: b} %>&nbsp;<%= link_to b.name, b.url, target: "_blank" %> - <%= link_to b.url, b.url, target: "_blank" %><small class="text-muted"> - <%= b.description %></small></h4>
-				</div>
-				<div class="col-sm-2">
-					<%= link_to "Edit", edit_topic_bookmark_path(@topic, b), class: "btn btn-default btn-xs" %>
-					<%= link_to "Delete", topic_bookmark_path(@topic, b), method: :delete, data: {confirm: "Are you sure you want to delete the \"#{b.name}\" bookmark?"}, class: "btn btn-danger btn-xs" %>
-				</div>
+	<div class="col-sm-10 col-sm-offset-1">
+		<div class="text-center topic-ctrl-group">
+			<%= link_to "Add Bookmark", new_topic_bookmark_path(@topic), class: "btn btn-primary btn-lg topic-ctrl-btn" %>
+			<div class="dropdown topic-ctrl-btn" style="display: inline-block;">
+			  <button class="btn btn-default btn-lg dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			    Topic Options
+			    <span class="caret"></span>
+			  </button>
+			  <ul class="dropdown-menu dropdown-big" aria-labelledby="dropdownMenu1">
+			    <li class="topic-ctrl-option text-center"><%= link_to "Edit Topic", edit_topic_path %></li>
+			    <li class="delete-item topic-ctrl-option text-center"><%= link_to "Delete Topic", @topic, method: :delete, class: "delete-topic-btn", data: {confirm: "Are you sure you want to delete the topic, \"#{@topic.title}\"?"} %></li>
+			  </ul>
 			</div>
-		<% end %>
+			<!-- <%= link_to "Edit Topic", edit_topic_path, class: "btn btn-default btn-lg edit-topic-btn topic-ctrl-btn" %> -->
+			<!-- <%= link_to "Delete Topic", @topic, method: :delete, class: "btn btn-danger btn-sm delete-topic-btn topic-ctrl-btn", data: {confirm: "Are you sure you want to delete the topic, \"#{@topic.title}\"?"} %> -->
+		</div>
+		<hr />
+		<ul>
+			<% @topic.bookmarks.each do |b| %>
+				<div class="row">
+					<div class="control-btn-group pull-right">
+						<%= render partial: 'likes/like', locals: {topic: b.topic, bookmark: b} %>&nbsp;
+						<div class="dropdown">
+						  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+						    Options
+						    <span class="caret"></span>
+						  </button>
+						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+								<li class="topic-ctrl-option text-center"><%= link_to "View", topic_bookmark_path(@topic, b) %></li>
+								<li role="separator" class="divider"></li>
+						    <li class="topic-ctrl-option text-center"><%= link_to "Edit", edit_topic_bookmark_path(@topic, b) %></li>
+						    <li class="topic-ctrl-option delete-item text-center"><%= link_to "Delete", topic_bookmark_path(@topic, b), class: "delete-topic-btn", method: :delete, data: {confirm: "Are you sure you want to delete the \"#{b.name}\" bookmark?"} %></li>
+						  </ul>
+						</div>
+						<!-- <%= link_to "Edit", edit_topic_bookmark_path(@topic, b), class: "btn btn-default btn-xs" %> -->
+						<!-- <%= link_to "Delete", topic_bookmark_path(@topic, b), method: :delete, data: {confirm: "Are you sure you want to delete the \"#{b.name}\" bookmark?"}, class: "btn btn-danger btn-xs" %> -->
+					</div>
+					<h4 class="clearfix"><li><%= link_to b.name, b.url, target: "_blank" %> - <%= link_to b.url, b.url, target: "_blank" %><small class="text-muted"> - <%= b.description %></small></li></h4>
+				</div>
+			<% end %>
+		</ul>
 	</div>
 </div>

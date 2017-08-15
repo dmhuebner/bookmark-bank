@@ -6,14 +6,8 @@
 
 }
 
-.new-topic-btn,
-.edit-topic-btn {
+.new-topic-btn, {
 	margin: 2rem;
-}
-
-.delete-topic-btn {
-	margin-top: 2rem;
-	margin-bottom: 2rem;
 }
 
 // .topic-bookmark {
@@ -22,4 +16,44 @@
 
 .control-btn-group {
 	margin-left: 2rem;
+}
+
+.bookmark-topic-title {
+	background-color: #eee;
+	padding: 2rem;
+	border-radius: 5px;
+}
+
+.topic-ctrl-btn {
+	margin-left: 1rem;
+}
+
+.dropdown-menu {
+	padding: 0;
+}
+
+li.delete-item a {
+	background-color: #D9534F;
+	border-color: #eed3d7;
+	color: #FFF;
+}
+
+.dropdown-menu li.delete-item a {
+	color: #FFF;
+}
+
+.dropdown-menu li.delete-item:hover a {
+	background-color: #eed3d7;
+	color: #D9534F;
+}
+
+.dropdown-menu.dropdown-big li.topic-ctrl-option a {
+	margin: 0;
+	padding: 1rem;
+	font-size: 1.5rem;
+}
+
+li.delete-item:active {
+	background-color: #b94a48;
+	color: #FFF;
 }
