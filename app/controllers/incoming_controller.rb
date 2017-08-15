@@ -32,6 +32,8 @@ class IncomingController < ApplicationController
     end
 
     @bookmark = @topic.bookmarks.create(url: @url, name: @name, description: "Enter a description", user: @user)
+		# Like newly created bookmark
+		@like = @bookmark.likes.create(user: @user)
 
     head 200
 

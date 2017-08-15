@@ -6,13 +6,15 @@ class TopicsController < ApplicationController
 	def my_bookmarks
 		@bookmarks = current_user.bookmarks
 
-		@topics = []
+		@liked_bookmarks = []
 
-		@bookmarks.each do |b|
-			if !@topics.include?(b.topic)
-				@topics.push(b.topic)
-			end
-		end
+		current_user.likes.each {|l| @liked_bookmarks.push(l.bookmark)}
+
+		@topics = []
+		@liked_bookmark_topics = []
+
+		topics_of_bookmarks(@liked_bookmark_topics, @liked_bookmarks)
+		topics_of_bookmarks(@topics, @bookmarks)
 
 		# Pundit Authorization
 		authorize Topic
@@ -82,5 +84,13 @@ class TopicsController < ApplicationController
 	private
 	def topic_params
 		params.require(:topic).permit(:title, :user_id, :image)
+	end
+
+	def topics_of_bookmarks(topics, bookmarks)
+		bookmarks.each do |b|
+			if !topics.include?(b.topic)
+				topics.push(b.topic)
+			end
+		end
 	end
 end

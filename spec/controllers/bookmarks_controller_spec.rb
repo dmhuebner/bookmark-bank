@@ -15,6 +15,8 @@ RSpec.describe BookmarksController, type: :controller do
 		other_user.confirm
 	end
 
+	# TODO create context for guest user
+
 	context "signed in user" do
 		before do
 			sign_in my_user
@@ -57,6 +59,10 @@ RSpec.describe BookmarksController, type: :controller do
 			it "assigns Bookmark.last to @bookmark" do
 				post :create, topic_id: my_topic.id, bookmark: {name: RandomData.random_word, url: RandomData.random_url, description: RandomData.random_sentence, topic_id: my_topic.id}
 				expect(assigns(:bookmark)).to eq(Bookmark.last)
+			end
+			it "creates a new like for @bookmark" do
+				post :create, topic_id: my_topic.id, bookmark: {name: RandomData.random_word, url: RandomData.random_url, description: RandomData.random_sentence, topic_id: my_topic.id}
+				expect(assigns(:like)).to eq(Like.last)
 			end
 			it "redirects to the bookmarks topic show view" do
 				post :create, topic_id: my_topic.id, bookmark: {name: RandomData.random_word, url: RandomData.random_url, description: RandomData.random_sentence, topic_id: my_topic.id}
