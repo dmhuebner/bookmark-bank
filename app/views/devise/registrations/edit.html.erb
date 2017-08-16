@@ -4,9 +4,14 @@
 		<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 		  <%= devise_error_messages! %>
 
+			<div class="field form-group">
+				<%= f.label :name, class: "sr-only" %><br />
+				<%= f.text_field :name, autofocus: true, class: "form-control", placeholder: "Enter a name" %>
+			</div>
+
 		  <div class="field form-group">
-		    <%= f.label :email, class: "sr-only" %><br />
-		    <%= f.email_field :email, autofocus: true, class: "form-control", placeholder: "Enter your email" %>
+		    <%= f.label :email, class: "sr-only" %>
+		    <%= f.email_field :email, class: "form-control", placeholder: "Enter your email" %>
 		  </div>
 
 		  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -24,7 +29,7 @@
 		  </div>
 
 		  <div class="field form-group text-center">
-				<strong class="text-center">Confirm your changes</strong><br />
+				<a class="text-center text-muted">Confirm your changes</a><br />
 		    <%= f.label :current_password, class: "sr-only" %>
 		    <%= f.password_field :current_password, autocomplete: "off", class: "form-control", placeholder: "Enter your current password" %>
 		  </div>

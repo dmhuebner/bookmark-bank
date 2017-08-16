@@ -9,24 +9,7 @@
 		<br />
 		<div>
 			<%= render partial: 'likes/like', locals: {topic: @bookmark.topic, bookmark: @bookmark} %>&nbsp;
-			<div class="dropdown" style="display: inline-block">
-				<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-					More
-					<span class="caret"></span>
-				</button>
-				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-					<li class="topic-ctrl-option text-center"><%= link_to "View Bookmark", topic_bookmark_path(@bookmark.topic, @bookmark) %></li>
-					<li role="separator" class="divider"></li>
-					<% if policy(@bookmark).update? %>
-						<li class="topic-ctrl-option text-center"><%= link_to "Edit", edit_topic_bookmark_path(@bookmark.topic, @bookmark) %></li>
-					<% end %>
-					<% if policy(@bookmark).destroy? %>
-						<li class="topic-ctrl-option delete-item text-center"><%= link_to "Delete", topic_bookmark_path(@bookmark.topic, @bookmark), class: "delete-topic-btn", method: :delete, data: {confirm: "Are you sure you want to delete the \"#{@bookmark.name}\" bookmark?"} %></li>
-					<% end %>
-				</ul>
-			</div>
-			<!-- <%= link_to "Edit", edit_topic_bookmark_path(@bookmark.topic, @bookmark), class: "btn btn-default edit-topic-btn" %>
-			<%= link_to "Delete", [@bookmark.topic, @bookmark], method: :delete, class: "btn btn-danger delete-topic-btn", data: {confirm: "Are you sure you want to delete the topic, \"#{@bookmark.name}\"?"} %> -->
+			<%= render partial: 'bookmarks/options', locals: {topic: @bookmark.topic, bookmark: @bookmark} %>
 		</div>
 	</div>
 </div>
