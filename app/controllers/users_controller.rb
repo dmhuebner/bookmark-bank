@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
-		@user = current_user
+		@user = User.friendly.find(current_user.id)
 		@bookmarks = @user.bookmarks
 
 		@liked_bookmarks = []
