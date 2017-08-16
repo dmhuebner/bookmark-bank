@@ -22,6 +22,11 @@
 		<%= f.label :description, class: "sr-only" %>
 		<%= f.text_field :description, class: "form-control input-lg", placeholder: "Short description (optional)" %>
 	<% end %>
+	<%= form_group_tag(bookmark.errors[:topic_id]) do %>
+		<%= f.label :topic_id, "Change Topic", class: "sr-only" %>
+		<h4 class="text-muted lead text-center">Change Topic?</h4>
+		<%= f.select :topic_id, Topic.all.collect { |t| [ t.title, t.id ] }, {}, class: "form-control input-lg" %>
+	<% end %>
 	<div class="form-group text-center">
 		<%= f.submit "Save", class: "btn btn-primary btn-lg" %>
 		<%= link_to "Cancel", topic_path(topic), class: "btn btn-default btn-lg" %>

@@ -1,4 +1,8 @@
 class Topic < ActiveRecord::Base
+	# FriendlyId
+	extend FriendlyId
+	friendly_id :title, use: :slugged
+
 	# Relations
   belongs_to :user
 	has_many :bookmarks, dependent: :destroy

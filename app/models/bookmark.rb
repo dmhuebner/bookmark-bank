@@ -1,4 +1,8 @@
 class Bookmark < ActiveRecord::Base
+	# FriendlyId
+	extend FriendlyId
+	friendly_id :name, use: :slugged
+
 	# Relations
   belongs_to :topic
 	belongs_to :user

@@ -1,15 +1,15 @@
 class BookmarksController < ApplicationController
   def show
-		@bookmark = Bookmark.find(params[:id])
+		@bookmark = Bookmark.friendly.find(params[:id])
   end
 
   def new
-		@topic = Topic.find(params[:topic_id])
+		@topic = Topic.friendly.find(params[:topic_id])
 		@bookmark = @topic.bookmarks.new
   end
 
 	def create
-		@topic = Topic.find(params[:topic_id])
+		@topic = Topic.friendly.find(params[:topic_id])
 		@bookmark = @topic.bookmarks.build(bookmark_params)
 		@bookmark.user = current_user
 
@@ -24,19 +24,22 @@ class BookmarksController < ApplicationController
 	end
 
   def edit
-		@topic = Topic.find(params[:topic_id])
-		@bookmark = @topic.bookmarks.find(params[:id])
+		@topic = Topic.friendly.find(params[:topic_id])
+		@bookmark = @topic.bookmarks.friendly.find(params[:id])
 		# Pundit Authorization
 		authorize @bookmark
   end
 
 	def update
-		@topic = Topic.find(params[:topic_id])
-		@bookmark = @topic.bookmarks.find(params[:id])
+		@topic = Topic.friendly.find(params[:topic_id])
+		@bookmark = @topic.bookmarks.friendly.find(params[:id])
 		# Pundit Authorization
 		authorize @bookmark
 		@bookmark.topic = @topic
 		@bookmark.assign_attributes(bookmark_params)
+
+		# FriendlyId will recreate slug if nil
+		@bookmark.slug = nil
 
 		if @bookmark.save
 			flash[:notice] = "\"#{@bookmark.name}\" was updated successfully."
@@ -48,8 +51,8 @@ class BookmarksController < ApplicationController
 	end
 
 	def destroy
-		@topic = Topic.find(params[:topic_id])
-		@bookmark = @topic.bookmarks.find(params[:id])
+		@topic = Topic.friendly.find(params[:topic_id])
+		@bookmark = @topic.bookmarks.friendly.find(params[:id])
 		# Pundit Authorization
 		authorize @bookmark
 

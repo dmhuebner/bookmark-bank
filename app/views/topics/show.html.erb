@@ -7,20 +7,22 @@
 	<div class="col-sm-10 col-sm-offset-1">
 		<div class="text-center topic-ctrl-group">
 			<%= link_to "Add Bookmark", new_topic_bookmark_path(@topic), class: "btn btn-primary btn-lg topic-ctrl-btn" %>
-			<div class="dropdown topic-ctrl-btn" style="display: inline-block;">
-			  <button class="btn btn-default btn-lg dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-			    Topic Options
-			    <span class="caret"></span>
-			  </button>
-			  <ul class="dropdown-menu dropdown-big" aria-labelledby="dropdownMenu1">
-					<% if policy(@topic).update? %>
-			    	<li class="topic-ctrl-option text-center"><%= link_to "Edit Topic", edit_topic_path %></li>
-					<% end %>
-					<% if policy(@topic).destroy? %>
-			    	<li class="delete-item topic-ctrl-option text-center"><%= link_to "Delete Topic", @topic, method: :delete, class: "delete-topic-btn", data: {confirm: "Are you sure you want to delete the topic, \"#{@topic.title}\"?"} %></li>
-					<% end %>
-			  </ul>
-			</div>
+			<% if policy(@topic).update? %>
+				<div class="dropdown topic-ctrl-btn" style="display: inline-block;">
+				  <button class="btn btn-default btn-lg dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+				    Topic Options
+				    <span class="caret"></span>
+				  </button>
+				  <ul class="dropdown-menu dropdown-big" aria-labelledby="dropdownMenu1">
+						<% if policy(@topic).update? %>
+				    	<li class="topic-ctrl-option text-center"><%= link_to "Edit Topic", edit_topic_path %></li>
+						<% end %>
+						<% if policy(@topic).destroy? %>
+				    	<li class="delete-item topic-ctrl-option text-center"><%= link_to "Delete Topic", @topic, method: :delete, class: "delete-topic-btn", data: {confirm: "Are you sure you want to delete the topic, \"#{@topic.title}\"?"} %></li>
+						<% end %>
+				  </ul>
+				</div>
+			<% end %>
 			<!-- <%= link_to "Edit Topic", edit_topic_path, class: "btn btn-default btn-lg edit-topic-btn topic-ctrl-btn" %> -->
 			<!-- <%= link_to "Delete Topic", @topic, method: :delete, class: "btn btn-danger btn-sm delete-topic-btn topic-ctrl-btn", data: {confirm: "Are you sure you want to delete the topic, \"#{@topic.title}\"?"} %> -->
 		</div>
@@ -30,24 +32,7 @@
 				<div class="row">
 					<div class="control-btn-group pull-right">
 						<%= render partial: 'likes/like', locals: {topic: b.topic, bookmark: b} %>&nbsp;
-						<div class="dropdown" style="display: inline-block">
-						  <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						    More
-						    <span class="caret"></span>
-						  </button>
-						  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-								<li class="topic-ctrl-option text-center"><%= link_to "View Bookmark", topic_bookmark_path(@topic, b) %></li>
-								<li role="separator" class="divider"></li>
-								<% if policy(b).update? %>
-						    	<li class="topic-ctrl-option text-center"><%= link_to "Edit", edit_topic_bookmark_path(@topic, b) %></li>
-								<% end %>
-								<% if policy(b).destroy? %>
-						    	<li class="topic-ctrl-option delete-item text-center"><%= link_to "Delete", topic_bookmark_path(@topic, b), class: "delete-topic-btn", method: :delete, data: {confirm: "Are you sure you want to delete the \"#{b.name}\" bookmark?"} %></li>
-								<% end %>
-						  </ul>
-						</div>
-						<!-- <%= link_to "Edit", edit_topic_bookmark_path(@topic, b), class: "btn btn-default btn-xs" %> -->
-						<!-- <%= link_to "Delete", topic_bookmark_path(@topic, b), method: :delete, data: {confirm: "Are you sure you want to delete the \"#{b.name}\" bookmark?"}, class: "btn btn-danger btn-xs" %> -->
+						<%= render partial: 'bookmarks/options', locals: {topic: @topic, bookmark: b} %>
 					</div>
 					<h4 class="clearfix"><li><%= link_to b.name, b.url, target: "_blank" %> - <%= link_to b.url, b.url, target: "_blank" %><small class="text-muted"> - <%= b.description %></small></li></h4>
 				</div>

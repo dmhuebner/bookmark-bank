@@ -23,7 +23,7 @@ class LikesController < ApplicationController
 	end
 
 	def destroy
-		@bookmark = Bookmark.find(params[:bookmark_id])
+		@bookmark = Bookmark.friendly.find(params[:bookmark_id])
 		@like = @bookmark.likes.find(params[:id])
 		authorize @like
 

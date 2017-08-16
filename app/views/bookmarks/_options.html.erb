@@ -1,0 +1,16 @@
+<div class="dropdown" style="display: inline-block">
+	<button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+		More
+		<span class="caret"></span>
+	</button>
+	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+		<li class="topic-ctrl-option text-center"><%= link_to "View Bookmark", topic_bookmark_path(topic, bookmark) %></li>
+		<% if policy(bookmark).update? %>
+			<li role="separator" class="divider"></li>
+			<li class="topic-ctrl-option text-center"><%= link_to "Edit", edit_topic_bookmark_path(topic, bookmark) %></li>
+		<% end %>
+		<% if policy(bookmark).destroy? %>
+			<li class="topic-ctrl-option delete-item text-center"><%= link_to "Delete", topic_bookmark_path(topic, bookmark), class: "delete-topic-btn", method: :delete, data: {confirm: "Are you sure you want to delete the \"#{bookmark.name}\" bookmark?"} %></li>
+		<% end %>
+	</ul>
+</div>

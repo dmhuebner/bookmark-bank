@@ -4,7 +4,7 @@ class TopicsController < ApplicationController
   end
 
   def show
-		@topic = Topic.find(params[:id])
+		@topic = Topic.friendly.find(params[:id])
   end
 
   def new
@@ -14,7 +14,7 @@ class TopicsController < ApplicationController
   end
 
   def edit
-		@topic = Topic.find(params[:id])
+		@topic = Topic.friendly.find(params[:id])
 		# Pundit Authorization
 		authorize @topic
   end
@@ -36,10 +36,13 @@ class TopicsController < ApplicationController
 	end
 
 	def update
-		@topic = Topic.find(params[:id])
+		@topic = Topic.friendly.find(params[:id])
 		# Pundit Authorization
 		authorize @topic
 		@topic.assign_attributes(topic_params)
+
+		# FriendlyId will recreate slug if nil
+		@topic.slug = nil
 
 		if @topic.save
 			flash[:notice] = "\"#{@topic.title}\" topic was updated successfully"
@@ -51,7 +54,7 @@ class TopicsController < ApplicationController
 	end
 
 	def destroy
-		@topic = Topic.find(params[:id])
+		@topic = Topic.friendly.find(params[:id])
 		# Pundit Authorization
 		authorize @topic
 

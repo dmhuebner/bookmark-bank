@@ -37,5 +37,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 # Pundit - Authorization
 gem 'pundit'
+# Friendly ID
+gem 'friendly_id', '~> 5.1.0'
 # Image processing
 # gem 'dragonfly'
