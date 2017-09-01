@@ -43,3 +43,49 @@
 }
 * html .clearfix             { zoom: 1; } /* IE6 */
 *:first-child+html .clearfix { zoom: 1; } /* IE7 */
+
+
+/***===================***
+DESIGN STYLES
+======================***/
+
+body {
+	background-color: #267cd7;
+	color: #fff;
+}
+
+.jumbotron {
+	background-color: #65aefa;
+}
+
+a {
+	color: #e47729;;
+}
+
+a:hover {
+	color: #fff;
+}
+
+.text-muted {
+	color: #fff;
+}
+
+.btn.btn-primary {
+	background-color: #e47729;
+	border: 1px solid #cf6921;
+	color: #fff;
+}
+
+.nav .navbar-brand {
+	color: #fff;
+	background-color: #65aefa;
+}
+
+.nav .navbar-brand:hover {
+	background-color: #e47729;
+	color: #fff;
+}
+
+.simple-nav-link {
+	color: #fff;
+}

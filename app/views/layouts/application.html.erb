@@ -23,13 +23,13 @@
 			<% if user_signed_in? %>
 				<ul class="navbar-right">
 					<strong>Welcome <%= current_user.name %>!</strong>
-			    <li class="sign-in-nav"><%= link_to 'Edit Profile', edit_user_registration_path, class: 'navbar-link' %></li>
+			    <li class="sign-in-nav"><%= link_to 'Edit Profile', edit_user_registration_path, class: 'navbar-link simple-nav-link' %></li>
 					<li class="sign-in-nav"><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'navbar-link btn btn-default btn-sm'  %></li>
 				</ul>
 		  <% else %>
 				<ul class="navbar-right">
 					<li class="sign-in-nav"><%= link_to "Sign Up", new_user_registration_path, class: 'navbar-link btn btn-primary btn-sm'  %></li>
-					<li class="sign-in-nav"><%= link_to "Sign In", new_user_session_path, class: 'navbar-link'  %></li>
+					<li class="sign-in-nav"><%= link_to "Sign In", new_user_session_path, class: 'navbar-link sign-in-link'  %></li>
 				</ul>
 		  <% end %>
 		</ul>
