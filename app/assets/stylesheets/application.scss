@@ -23,6 +23,7 @@
 
 .bookmark-topic-title {
 	margin-bottom: 2rem;
+	background-color: #ade6ff;
 }
 
 /***** Devise links *****/
@@ -50,35 +51,38 @@ DESIGN STYLES
 ======================***/
 
 body {
-	background-color: #267cd7;
-	color: #fff;
+	// background-color: #267cd7;
+	background-color: #FFF;
+	color: #ee7823;
 }
 
 .jumbotron {
-	background-color: #65aefa;
+	// background-color: #65aefa;
+	background-color: #0FACF3;
+	color: #FFF;
 }
 
 a {
-	color: #e47729;;
+	color: #ee7823;;
 }
 
 a:hover {
-	color: #fff;
+	color: #0FACF3;
 }
 
-.text-muted {
-	color: #fff;
-}
+// .text-muted {
+// 	color: #fff;
+// }
 
 .btn.btn-primary {
-	background-color: #e47729;
+	background-color: #ee7823;
 	border: 1px solid #cf6921;
 	color: #fff;
 }
 
 .nav .navbar-brand {
 	color: #fff;
-	background-color: #65aefa;
+	background-color: #0FACF3;
 }
 
 .nav .navbar-brand:hover {
@@ -87,5 +91,5 @@ a:hover {
 }
 
 .simple-nav-link {
-	color: #fff;
+	color: #0FACF3;
 }

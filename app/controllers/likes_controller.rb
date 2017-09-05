@@ -8,7 +8,7 @@ class LikesController < ApplicationController
   end
 
 	def create
-		@bookmark = Bookmark.find(params[:bookmark_id])
+		@bookmark = Bookmark.friendly.find(params[:bookmark_id])
 
 		@like = @bookmark.likes.build(user_id: current_user.id)
 		authorize @like
