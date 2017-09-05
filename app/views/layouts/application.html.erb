@@ -11,7 +11,7 @@
 </head>
 
 <body>
-	<div class="container">
+	<div class="container" id="wrapper">
 		<ul class="nav nav-tabs">
 			<% if user_signed_in? %>
 				<li><%= link_to "Bookmark Bank", topics_path, class: "navbar-brand" %></li>
@@ -42,5 +42,8 @@
 		<%= yield %>
 	</div>
 
+	<footer class="footer">
+			<p>Built by <strong><a href="http://davidmhuebner.com" target="_blank">David Huebner</a></strong> | 2017</p>
+	</footer>
 </body>
 </html>

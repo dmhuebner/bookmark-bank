@@ -82,7 +82,7 @@ a:hover {
 
 .nav .navbar-brand {
 	color: #fff;
-	background-color: #0FACF3;
+	background-color: #0271A1;
 }
 
 .nav .navbar-brand:hover {
@@ -91,5 +91,24 @@ a:hover {
 }
 
 .simple-nav-link {
-	color: #0FACF3;
+	color: #0271A1;
+}
+
+.jumbotron .bookmarks-jumbo-label {
+	font-size: 3rem;
+}
+
+/***** Footer Styles *****/
+.footer {
+	background-color: #0271A1;
+	color: #FFF;
+	min-height: 4rem;
+	text-align: center;
+	padding: 2rem;
+	padding-bottom: 2rem;
+}
+
+/***** Sticky Footer Styles *****/
+#wrapper {
+	min-height: 93vh;
 }
